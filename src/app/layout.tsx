@@ -15,6 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      {/* <enable-gpu>true</enable-gpu> */}
       <body className={inter.className}>{children}</body>
     </html>
   )
