@@ -1,4 +1,3 @@
-"use client";
 import React, { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { BoxGeometry, TextureLoader, RepeatWrapping } from "three";
@@ -14,18 +13,17 @@ const Room = () => {
   const mesh = useRef();
   useFrame(({ camera }) => {
     // Código para mover la cámara hacia adelante, pero sin llegar al final
+    // camera.position.z += 0.01;
     // Mueve la habitación hacia atrás para crear la ilusión de movimiento hacia adelante
     // Cuando la habitación se ha alejado lo suficiente, la reseteamos a la posición original
     if (mesh.current.position.z > -30) {
-      if (mesh.current.position.z < -28) {
-        mesh.current.material.opacity -= 0.005;
-      }
       if (mesh.current.position.z < -29) {
         mesh.current.position.z -= 0.01;
+        mesh.current.material.opacity -= 0.01;
       } else {
         mesh.current.position.z -= 0.01;
-        if (mesh.current.material.opacity < 1) {
-          mesh.current.material.opacity += 0.005;
+        if(mesh.current.material.opacity < 1){
+          mesh.current.material.opacity += 0.01;
         }
       }
     } else {
@@ -35,31 +33,15 @@ const Room = () => {
   });
 
   const handleScroll = (e) => {
-    let sum;
-    if (e.wheelDeltaY > 0) {
-      sum = -0.5;
-    } else {
-      sum = 0.5;
-    }
-
-    mesh.current.position.z += sum;
-
-    if (mesh.current.position.z > -30) {
-      if (mesh.current.position.z < -29) {
-        mesh.current.material.opacity -= 0.01;
-      } else {
-        if (mesh.current.material.opacity < 1) {
-          mesh.current.material.opacity += 0.01;
-        }
-      }
-    } else {
-      mesh.current.position.z = 0;
-      mesh.current.material.opacity = 0;
-    }
+    console.log("test");
+    const { scrollTop } = e.target.documentElement;
+    const maxScrollTop = e.target.body.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollTop / maxScrollTop;
+    mesh.current.position.z = -20 * scrollFraction; // Ajusta esta línea según cómo quieras que se mueva la habitación
   };
 
   return (
-    <mesh ref={mesh} position={[0, 0, -5]}>
+    <mesh ref={mesh} position={[0, 0, -5]} onScroll={handleScroll}>
       <boxGeometry args={[50, 50, 50]} />
       <meshBasicMaterial
         attach="material"

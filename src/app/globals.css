@@ -18,6 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  margin: 0 !important;
   background: linear-gradient(
       to bottom,
       transparent,
