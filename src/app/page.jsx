@@ -8,29 +8,60 @@ import OrbitControls from "../components/OrbitControls";
 import Draggable from "../components/Draggable";
 import { Suspense } from "react";
 import Example from "../components/Example";
-import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Rainbow } from '../components/Rainbow'
+import { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Rainbow } from "../components/Rainbow";
+import * as THREE from "three";
 
-export default function App() {
-  return (
-    <Canvas>
-      <color attach="background" args={['black']} />
-      <Scene />
-    </Canvas>
-  )
+function init() {
+  //creating scene
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x2a3b4c);
+
+  //add camera
+  var camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight
+  );
+
+  //renderer
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  //add geometry
+  var geometry = new THREE.BoxGeometry();
+  var material = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    wireframe: true,
+  });
+  var cube = new THREE.Mesh(geometry, material);
+
+  scene.add(cube);
+
+  camera.position.z = 5;
+
+  //animation
+  var animate = function () {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    renderer.render(scene, camera);
+  };
+
+  animate();
 }
 
-function Scene() {
-  const ref = useRef()
-  useFrame((state, delta) => (ref.current.rotation.z += delta / 5))
-  return <Rainbow ref={ref} startRadius={0} endRadius={0.65} fade={0} />
+export default function App() {
+  return <div className="App">{init()}</div>;
 }
 
 // export default function Home() {
 //   return (
 //     <div className={css.scene}>
-      
+
 //     <Canvas>
 //       <color attach="background" args={['black']} />
 //       <Scene />
