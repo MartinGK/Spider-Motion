@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+  font-family: 'Spider'; /* Usar el nombre que quieras */
+  src: url('/spider.ttf') format('truetype'); /* Ruta al archivo de fuente. Asegúrate de incluir la ruta correcta */
+  font-style: normal; /* Estilo normal */  
+  /* font-weight: 400; */
+}
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

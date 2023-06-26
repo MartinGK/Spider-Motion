@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
+'use client'
+import React, { useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { BoxGeometry, TextureLoader, RepeatWrapping } from "three";
 import * as THREE from "three";

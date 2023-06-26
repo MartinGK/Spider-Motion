@@ -10,6 +10,7 @@ function Draggable(props) {
   const controlsRef = useRef();
   const [objects, setObjects] = useState();
   const { camera, gl, scene } = useThree();
+
   useEffect(() => {
     setObjects(groupRef.current.children);
   }, [groupRef]);
@@ -21,7 +22,8 @@ function Draggable(props) {
     controlsRef.current.addEventListener("hoveroff", () => {
       scene.orbitControls.enabled = true;
     });
-  }, [objects]);
+  }, [objects, scene, controlsRef]);
+  
   return (
     <group ref={groupRef}>
       <dragControls ref={controlsRef} args={[objects, camera, gl.domElement]} />

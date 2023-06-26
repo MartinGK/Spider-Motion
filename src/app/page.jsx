@@ -4,6 +4,9 @@ import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { BoxGeometry, TextureLoader, RepeatWrapping } from "three";
 import * as THREE from "three";
 import "../app/globals.css";
+import CardsGroup from "../components/CardsGroup";
+import Portrait from "../components/Portrait";
+import Controls from "../components/Controls";
 
 const Room = () => {
   const texture = useLoader(TextureLoader, "textura.jpg");
@@ -72,11 +75,16 @@ const Room = () => {
 };
 
 const App = () => (
-  <div className="w-screen h-screen">
-    <Canvas>
-      <Room />
-    </Canvas>
-  </div>
+  <>
+    {/* <Portrait /> */}
+    <div className="w-screen h-screen absolute">
+      <CardsGroup />
+      <Canvas>
+        <Room />
+        <Controls />
+      </Canvas>
+    </div>
+  </>
 );
 
 export default App;
