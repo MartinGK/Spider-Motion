@@ -62,7 +62,6 @@ export default function CardsGroup() {
               url={cardInfo.imgUrl}
               mousePosition={[mousePositionX, mousePositionY]}
               spiderId={cardInfo.id}
-              onPointerOver={handleMouseOver}
               rotation={cardInfo.rotation}
               position={[cardInfo.x, cardInfo.y, cardInfo.z]}
             />
