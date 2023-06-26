@@ -9,7 +9,6 @@ extend({ Link });
 function ImagePlane({ url, mousePosition, ...props }) {
   const router = useRouter();
   const texture = useLoader(TextureLoader, url);
-  const [dataBeforeClicked, setDataBeforeClicked] = useState(null);
   const meshRef = useRef();
 
   useFrame(() => {
@@ -26,21 +25,11 @@ function ImagePlane({ url, mousePosition, ...props }) {
     router.push(`/spider/${props.spiderId}`);
   };
 
-  const handlePointerLeave = () => {
-    if (dataBeforeClicked) {
-      meshRef.current.position.x = dataBeforeClicked.x;
-      meshRef.current.position.y = dataBeforeClicked.x;
-      meshRef.current.position.z = dataBeforeClicked.z;
-      meshRef.current.material.opacity = dataBeforeClicked.op;
-    }
-  };
-
   return (
       <mesh
         ref={meshRef}
         {...props}
         onClick={handleClick}
-        onPointerOut={handlePointerLeave}
         className="imagePlane"
       >
         <planeBufferGeometry attach="geometry" />
