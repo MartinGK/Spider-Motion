@@ -35,6 +35,8 @@ export default function CardsGroup() {
 
   const handleTouchMove = useCallback(
     (e) => {
+      e.preventDefault();
+      
       if (scrollMult > e.touches[0].clientY) {
         plusZAxis();
       } else {
