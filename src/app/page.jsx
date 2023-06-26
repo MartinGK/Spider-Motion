@@ -37,30 +37,6 @@ const Room = () => {
     }
   });
 
-  const handleScroll = (e) => {
-    let sum;
-    if (e.wheelDeltaY > 0) {
-      sum = -0.5;
-    } else {
-      sum = 0.5;
-    }
-
-    mesh.current.position.z += sum;
-
-    if (mesh.current.position.z > -30) {
-      if (mesh.current.position.z < -29) {
-        mesh.current.material.opacity -= 0.01;
-      } else {
-        if (mesh.current.material.opacity < 1) {
-          mesh.current.material.opacity += 0.01;
-        }
-      }
-    } else {
-      mesh.current.position.z = 0;
-      mesh.current.material.opacity = 0;
-    }
-  };
-
   return (
     <mesh ref={mesh} position={[0, 0, -5]}>
       <boxGeometry args={[50, 50, 50]} />
@@ -76,7 +52,7 @@ const Room = () => {
 
 const App = () => (
   <>
-    {/* <Portrait /> */}
+    <Portrait />
     <div className="w-screen h-screen absolute">
       <CardsGroup />
       <Canvas>
