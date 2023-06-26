@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const useImagesVariables = create((set) => ({
   data: [],
+  isMobile: true,
   loading: true,
   fetch: async () => {
     set({ loading: true });
@@ -34,6 +35,7 @@ const useImagesVariables = create((set) => ({
       });
     set({
       data,
+      isMobile: window.innerWidth < 850,
       loading: false,
     });
   },
@@ -90,6 +92,7 @@ const useImagesVariables = create((set) => ({
   },
   lookMousePosition: ({ mouseX, mouseY }) => {
     set((state) => {
+      if (state.isMobile) return state;
       const data = state.data.map((item, i) => {
         return {
           ...item,
@@ -100,7 +103,7 @@ const useImagesVariables = create((set) => ({
             // y: (-mouseX - item.y) * Math.PI * 0.01,
             // x: (mouseY / window.innerHeight) * Math.PI * 0.25,
             // y: (mouseX / window.innerWidth) * Math.PI * 0.25,
-            y: (mouseX / window.innerWidth) * Math.PI * 0.15 -0.1,
+            y: (mouseX / window.innerWidth) * Math.PI * 0.15 - 0.1,
             x:
               ((mouseY - item.y) / window.innerHeight + item.y) *
               Math.PI *

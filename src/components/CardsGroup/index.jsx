@@ -8,8 +8,10 @@ import Card from "../Card/index.jsx";
 
 export default function CardsGroup() {
   // const { fetch, data } = useMarvelStore();
-  const { data, loading, fetch, plusZAxis, minusZAxis, lookMousePosition } = useImagesVariables();
+  const { data, loading, fetch, plusZAxis, minusZAxis, lookMousePosition } =
+    useImagesVariables();
   const [scrollMult, setScrollMult] = useState(1);
+  const [isMobile, setIsMobile] = useState(true);
   const [mousePositionX, setMousePositionX] = useState(0);
   const [mousePositionY, setMousePositionY] = useState(0);
   const [screenWidth, setScreenWidth] = useState(0);
@@ -28,6 +30,9 @@ export default function CardsGroup() {
   const handleWheelCapture = (e) => {
     console.log(scrollMult);
     // checkZAxis(scrollMult);
+    // if(isMobile){
+    //   return;
+    // }
     if (e.deltaY > 0) {
       plusZAxis();
       // setScrollMult(scrollMult + 0.02);
@@ -55,9 +60,9 @@ export default function CardsGroup() {
     [scrollMult]
   );
 
-  const handleMouseOver =() =>{
-    console.log("IM HEREE")
-  }
+  const handleMouseOver = () => {
+    console.log("IM HEREE");
+  };
 
   return (
     <div
@@ -87,6 +92,7 @@ export default function CardsGroup() {
               key={`card-${i}`}
               url={cardInfo.imgUrl}
               mousePosition={[mousePositionX, mousePositionY]}
+              spiderId={cardInfo.id}
               // rotation={[
               //   Math.PI /
               //     (mousePositionY / (mousePositionY > screenHeight ? 10 : -10)),

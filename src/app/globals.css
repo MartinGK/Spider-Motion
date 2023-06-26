@@ -13,6 +13,45 @@
   /* font-weight: 400; */
 }
 
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.animate-bounceIn {
+  animation: bounceIn 1s forwards;
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out 3;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
